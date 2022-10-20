@@ -9,6 +9,7 @@ set encoding=UTF-8
 set showmatch
 set laststatus=2
 set noshowmode
+set hidden
 
 "Plugs
 call plug#begin('~/.config/nvim/plugged')
@@ -47,18 +48,26 @@ Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
-colorscheme gruvbox
-"let g:gruvbox_contrast_dark = "hard"
-
-let g:coc_global_extensions = [
-      \ 'coc-tsserver'
-      \ ]
-
-
 "---------Plug config----------
 
-let g:airline_powerline_fonts = 1
+colorscheme gruvbox
+let g:gruvbox_contrast_dark = "hard"
+
+
+" HTML, JSX
+let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
+
+
+" COC SETTING
+let g:coc_global_extensions = ['coc-tsserver']
+
+
+"FZF
+let $FZF_DEFAULT_OPTS='--layout=reverse'
+
+
 " lightline
+let g:airline_powerline_fonts = 1
 let g:lightline = {
       \ 'active': {
       \   'left': [['mode', 'paste'], ['relativepath', 'modified']],
@@ -82,20 +91,28 @@ let g:lightline = {
       \ }
       \}
 
+
 "-------- vim fugitive --------
 command! -bang -nargs=? -complete=dir GFiles
   \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 
+" always show signcolumns
+set signcolumn=yes
+
+
 " fugitive always vertical diffing
 set diffopt+=vertical
 
+
 "tree config
 let NERDTreeShowHidden=1
-
 "---------coc config ---------
 
 " GoTo code navigation.
@@ -120,8 +137,9 @@ endfunction
 let mapleader=" "
 
 "Plugs
-map <Leader>nt :NERDTreeFind<CR>
+map <Leader>d :NERDTreeToggle<CR>
 map <Leader>p :Files<CR>
+map <Leader>ag :Ag<CR>
 
 "quick semi
 nnoremap <Leader>w :w<CR>
@@ -135,8 +153,4 @@ nnoremap <Leader>< 10<C-w><
 map <Leader>b :Buffers<Cr>
 
 " faster scrolling
-nnoremap <C-j> 10<C-e>
-nnoremap <C-k> 10<C-y>
 nmap <Leader>s <Plug>(easymotion-s2)
-
-
