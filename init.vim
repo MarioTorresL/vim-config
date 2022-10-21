@@ -110,9 +110,9 @@ set signcolumn=yes
 " fugitive always vertical diffing
 set diffopt+=vertical
 
+"nerdtree
+let NERDTreeQuitOnOpen=1
 
-"tree config
-let NERDTreeShowHidden=1
 "---------coc config ---------
 
 " GoTo code navigation.
@@ -135,6 +135,10 @@ endfunction
 "Maps keys
 
 let mapleader=" "
+
+"OpenTerminal
+nnoremap <Leader>tv :botright vnew <Bar> :terminal<cr>
+nnoremap <Leader>th :botright new <Bar> :terminal<cr>
 
 "Plugs
 map <Leader>d :NERDTreeToggle<CR>
