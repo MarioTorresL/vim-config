@@ -137,8 +137,8 @@ endfunction
 let mapleader=" "
 
 "OpenTerminal
-nnoremap <Leader>tv :botright vnew <Bar> :terminal<cr>
-nnoremap <Leader>th :botright new <Bar> :terminal<cr>
+nnoremap <Leader>tv :botright vnew <Bar> :terminal zsh<cr>
+nnoremap <Leader>th :botright new <Bar> :terminal zsh<cr>
 
 "Plugs
 map <Leader>d :NERDTreeToggle<CR>
