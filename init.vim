@@ -31,6 +31,7 @@ Plug 'alvan/vim-closetag'
 "themes
 Plug 'morhetz/gruvbox'
 Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'ryanoasis/vim-devicons'
 
 "IDE
 Plug 'easymotion/vim-easymotion'
@@ -45,6 +46,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "git
 Plug 'tpope/vim-fugitive'
+
+"comments
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
@@ -137,10 +141,16 @@ endfunction
 let mapleader=" "
 
 "OpenTerminal
-nnoremap <Leader>tv :botright vnew <Bar> :terminal zsh<cr>
-nnoremap <Leader>th :botright new <Bar> :terminal zsh<cr>
+nnoremap <Leader>tv :botright vnew <Bar> :term<cr>
+nnoremap <Leader>th :botright new <Bar> :term<cr>
 
-"Plugs
+"Prettier config
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+nnoremap <leader>f :Prettier<CR>
+
+"comments config
+vnoremap <leader>" :Commentary<CR>
+
 map <Leader>d :NERDTreeToggle<CR>
 map <Leader>p :Files<CR>
 map <Leader>ag :Ag<CR>
