@@ -1,4 +1,4 @@
-set number
+﻿set number
 set mouse=a
 set numberwidth=1
 set clipboard=unnamed
@@ -31,6 +31,7 @@ Plug 'alvan/vim-closetag'
 "themes
 Plug 'morhetz/gruvbox'
 Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'EdenEast/nightfox.nvim', { 'tag': 'v1.0.0' }
 Plug 'ryanoasis/vim-devicons'
 
 "IDE
@@ -39,6 +40,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-signify'
 Plug 'yggdroot/indentline'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 "tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -55,8 +57,6 @@ call plug#end()
 "---------Plug config----------
 
 colorscheme gruvbox
-let g:gruvbox_contrast_dark = "hard"
-
 
 " HTML, JSX
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
@@ -106,16 +106,18 @@ command! -bang -nargs=* Ag
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-
 " always show signcolumns
 set signcolumn=yes
-
 
 " fugitive always vertical diffing
 set diffopt+=vertical
 
-"nerdtree
-let NERDTreeQuitOnOpen=1
+"NerdTree
+"
+"Start NERDTree and leave the cursor in it.
+autocmd VimEnter * NERDTree
+
+let NERDTreeShowHidden=1
 
 "---------coc config ---------
 
@@ -153,6 +155,7 @@ vnoremap <leader>" :Commentary<CR>
 
 map <Leader>d :NERDTreeToggle<CR>
 map <Leader>p :Files<CR>
+map <Leader>t :FileTypes<CR>
 map <Leader>ag :Ag<CR>
 
 "quick semi
@@ -168,3 +171,12 @@ map <Leader>b :Buffers<Cr>
 
 " faster scrolling
 nmap <Leader>s <Plug>(easymotion-s2)
+
+lua <<EOF
+require'treesitter'.setup {
+  -- ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+}
+EOF
