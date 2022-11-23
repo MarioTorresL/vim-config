@@ -3,6 +3,7 @@ set mouse=a
 set numberwidth=1
 set clipboard=unnamed
 syntax on
+set wrap
 set relativenumber
 set showcmd
 set encoding=UTF-8
@@ -10,6 +11,7 @@ set showmatch
 set laststatus=2
 set noshowmode
 set hidden
+set nocompatible
 
 "Plugs
 call plug#begin('~/.config/nvim/plugged')
@@ -30,6 +32,7 @@ Plug 'alvan/vim-closetag'
 
 "themes
 Plug 'morhetz/gruvbox'
+Plug 'bluz71/vim-nightfly-colors'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'EdenEast/nightfox.nvim', { 'tag': 'v1.0.0' }
 Plug 'ryanoasis/vim-devicons'
@@ -40,10 +43,13 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-signify'
 Plug 'yggdroot/indentline'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 
 "tmux
 Plug 'christoomey/vim-tmux-navigator'
+
+"autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "git
@@ -56,15 +62,14 @@ call plug#end()
 
 "---------Plug config----------
 
-colorscheme gruvbox
+" Vimscript initialization file
+colorscheme nightfox
 
 " HTML, JSX
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
 
-
 " COC SETTING
 let g:coc_global_extensions = ['coc-tsserver']
-
 
 "FZF
 let $FZF_DEFAULT_OPTS='--layout=reverse'
@@ -88,7 +93,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead'
       \ },
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'nightfox',
       \ 'subseparator': {
       \   'left': '',
       \   'right': ''
@@ -172,11 +177,12 @@ map <Leader>b :Buffers<Cr>
 " faster scrolling
 nmap <Leader>s <Plug>(easymotion-s2)
 
-lua <<EOF
-require'treesitter'.setup {
-  -- ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-  },
-}
-EOF
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+let g:UltiSnipsSnippetDirectories=[$HOME.'/nvim/UltiSnips']
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
+
+" use same javascript snipets to jsx
+autocmd FileType javascriptreact UltiSnipsAddFiletypes javascript
