@@ -6,7 +6,7 @@ syntax on
 set wrap
 set relativenumber
 set showcmd
-set encoding=UTF-8
+set encoding=utf8
 set showmatch
 set laststatus=2
 set noshowmode
@@ -63,7 +63,7 @@ call plug#end()
 "---------Plug config----------
 
 " Vimscript initialization file
-colorscheme nightfox
+colorscheme gruvbox
 
 " HTML, JSX
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
@@ -76,6 +76,7 @@ let $FZF_DEFAULT_OPTS='--layout=reverse'
 
 
 " lightline
+let g:webdevicons_enable_nerdtree = 1
 let g:airline_powerline_fonts = 1
 let g:lightline = {
       \ 'active': {
@@ -93,7 +94,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead'
       \ },
-      \ 'colorscheme': 'nightfox',
+      \ 'colorscheme': 'gruvbox',
       \ 'subseparator': {
       \   'left': '',
       \   'right': ''
